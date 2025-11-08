@@ -16,3 +16,4 @@
 "feat: Add error handling"  
 "feat: Add testing framework"  
 "feat: Add deployment configuration"  
+"feat: Add documentation"  
