@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="es"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>DbCheck.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">math-cards-backend</a> &gt; <a href="index.source.html" class="el_package">com.mathcards.db</a> &gt; <span class="el_source">DbCheck.java</span></div><h1>DbCheck.java</h1><pre class="source lang-java linenums">package com.mathcards.db;
+
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.Statement;
+
+/**
+ * Small command-line utility to verify PostgreSQL connectivity and run a couple of sanity queries.
+ *
+ * Usage (env vars or system properties):
+ *  - JDBC_URL (default: jdbc:postgresql://localhost:5432/mathcards)
+ *  - DB_USER (default: mathuser)
+ *  - DB_PASS (default: mathpass)
+ */
+<span class="nc" id="L16">public class DbCheck {</span>
+    public static void main(String[] args) {
+<span class="nc" id="L18">        String jdbcUrl = firstNonEmpty(System.getProperty(&quot;JDBC_URL&quot;), System.getenv(&quot;JDBC_URL&quot;), &quot;jdbc:postgresql://localhost:5432/mathcards&quot;);</span>
+<span class="nc" id="L19">        String user = firstNonEmpty(System.getProperty(&quot;DB_USER&quot;), System.getenv(&quot;DB_USER&quot;), &quot;mathuser&quot;);</span>
+<span class="nc" id="L20">        String pass = firstNonEmpty(System.getProperty(&quot;DB_PASS&quot;), System.getenv(&quot;DB_PASS&quot;), &quot;mathpass&quot;);</span>
+
+<span class="nc" id="L22">        System.out.println(&quot;Using JDBC URL: &quot; + jdbcUrl);</span>
+
+<span class="nc" id="L24">        try (Connection conn = DriverManager.getConnection(jdbcUrl, user, pass);</span>
+<span class="nc" id="L25">             Statement st = conn.createStatement()) {</span>
+
+<span class="nc" id="L27">            System.out.println(&quot;Connected to database successfully.&quot;);</span>
+
+            // Simple count from users
+<span class="nc" id="L30">            try (ResultSet rs = st.executeQuery(&quot;SELECT COUNT(*) FROM users&quot;)) {</span>
+<span class="nc bnc" id="L31" title="All 2 branches missed.">                if (rs.next()) {</span>
+<span class="nc" id="L32">                    System.out.println(&quot;users count: &quot; + rs.getInt(1));</span>
+                }
+<span class="nc" id="L34">            } catch (Exception e) {</span>
+<span class="nc" id="L35">                System.out.println(&quot;Could not query users table (might be empty or missing). Message: &quot; + e.getMessage());</span>
+            }
+
+            // Show up to 5 equations
+<span class="nc" id="L39">            try (ResultSet rs = st.executeQuery(&quot;SELECT id, user_id, term1, term2, operation, solution FROM equations LIMIT 5&quot;)) {</span>
+<span class="nc" id="L40">                System.out.println(&quot;equations (up to 5):&quot;);</span>
+<span class="nc" id="L41">                int rows = 0;</span>
+<span class="nc bnc" id="L42" title="All 2 branches missed.">                while (rs.next()) {</span>
+<span class="nc" id="L43">                    rows++;</span>
+<span class="nc" id="L44">                    System.out.printf(&quot;  id=%d user_id=%s term1=%s term2=%s op=%s solution=%s\n&quot;,</span>
+<span class="nc" id="L45">                            rs.getInt(&quot;id&quot;), rs.getObject(&quot;user_id&quot;), rs.getObject(&quot;term1&quot;), rs.getObject(&quot;term2&quot;), rs.getObject(&quot;operation&quot;), rs.getObject(&quot;solution&quot;));</span>
+                }
+<span class="nc bnc" id="L47" title="All 2 branches missed.">                if (rows == 0) System.out.println(&quot;  (no rows)&quot;);</span>
+<span class="nc" id="L48">            } catch (Exception e) {</span>
+<span class="nc" id="L49">                System.out.println(&quot;Could not query equations table. Message: &quot; + e.getMessage());</span>
+            }
+
+<span class="nc" id="L52">            System.out.println(&quot;DB check finished.&quot;);</span>
+
+<span class="nc" id="L54">        } catch (Exception e) {</span>
+<span class="nc" id="L55">            System.err.println(&quot;Failed to connect or run checks: &quot; + e.getMessage());</span>
+<span class="nc" id="L56">            e.printStackTrace(System.err);</span>
+<span class="nc" id="L57">            System.exit(2);</span>
+        }
+<span class="nc" id="L59">    }</span>
+
+    private static String firstNonEmpty(String... vals) {
+<span class="nc bnc" id="L62" title="All 2 branches missed.">        for (String v : vals) {</span>
+<span class="nc bnc" id="L63" title="All 4 branches missed.">            if (v != null &amp;&amp; !v.isBlank()) return v;</span>
+        }
+<span class="nc" id="L65">        return null;</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.11.202310140853</span></div></body></html>

@@ -1,0 +1,3 @@
+{
+  "note": "This firebase.json was moved to Frontend/firebase.json. Backend should contain only Java sources. You can delete this file."
+}
