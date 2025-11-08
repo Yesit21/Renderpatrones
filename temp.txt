@@ -6,3 +6,4 @@
 "feat: Implement game screens"  
 "feat: Add Firebase integration"  
 "feat: Add internationalization support"  
+"feat: Add IndexedDB for local storage"  
