@@ -21,3 +21,4 @@
 "feat: Add animations"  
 "feat: Add offline support"  
 "feat: Add analytics"  
+"feat: Final project setup"  
