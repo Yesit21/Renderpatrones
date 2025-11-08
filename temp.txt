@@ -7,3 +7,4 @@
 "feat: Add Firebase integration"  
 "feat: Add internationalization support"  
 "feat: Add IndexedDB for local storage"  
+"feat: Add API endpoints"  
