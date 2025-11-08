@@ -17,3 +17,4 @@
 "feat: Add testing framework"  
 "feat: Add deployment configuration"  
 "feat: Add documentation"  
+"feat: Add TypeScript types"  
