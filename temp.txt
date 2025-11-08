@@ -13,3 +13,4 @@
 "feat: Add sound effects"  
 "feat: Add responsive design"  
 "feat: Add accessibility features"  
+"feat: Add error handling"  
