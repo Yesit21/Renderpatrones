@@ -10,3 +10,4 @@
 "feat: Add API endpoints"  
 "feat: Add performance optimizations"  
 "feat: Add timer component"  
+"feat: Add sound effects"  
