@@ -19,3 +19,4 @@
 "feat: Add documentation"  
 "feat: Add TypeScript types"  
 "feat: Add animations"  
+"feat: Add offline support"  
