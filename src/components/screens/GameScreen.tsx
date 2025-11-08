@@ -173,7 +173,7 @@ export const GameScreen: React.FC<GameScreenProps> = ({
                       type="number"
                       placeholder="x = ?"
                       value={userAnswer}
-                      onChange={(e) => onUserAnswerChange(e.target.value)}
+                      onChange={(e: React.ChangeEvent<HTMLInputElement>) => onUserAnswerChange(e.target.value)}
                       className={`text-2xl text-center bg-black/50 border-2 border-${styles.borderColor} text-white placeholder:text-gray-500 focus:border-${styles.primaryColor}-400`}
                     />
                   )}
