@@ -5,3 +5,4 @@
 "feat: Add animated backgrounds"  
 "feat: Implement game screens"  
 "feat: Add Firebase integration"  
+"feat: Add internationalization support"  
