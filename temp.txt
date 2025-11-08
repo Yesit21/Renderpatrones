@@ -4,3 +4,4 @@
 "feat: Create UI components library"  
 "feat: Add animated backgrounds"  
 "feat: Implement game screens"  
+"feat: Add Firebase integration"  
