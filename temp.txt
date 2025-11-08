@@ -2,3 +2,4 @@
 "feat: Add user authentication system"  
 "feat: Add game logic and state management"  
 "feat: Create UI components library"  
+"feat: Add animated backgrounds"  
