@@ -18,3 +18,4 @@
 "feat: Add deployment configuration"  
 "feat: Add documentation"  
 "feat: Add TypeScript types"  
+"feat: Add animations"  
